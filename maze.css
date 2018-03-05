@@ -1,0 +1,43 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    text-align: center;
+}
+
+#container {
+    display: flex;
+    flex-flow: row wrap;
+    width: 840px;
+}
+
+.player {
+    background-color: blueviolet;
+    position: absolute;
+}
+
+.cell {
+    width: 40px;
+    height: 40px;
+}
+
+.floor {
+    background-color: white;
+}
+
+.wall {
+    background-color: navy;
+}
+
+.start::after {
+    content: "S";
+    color: black;
+    font-size: 20px;
+}
+
+.finish::after {
+    content: "F";
+    color: black;
+    font-size: 20px;
+}
