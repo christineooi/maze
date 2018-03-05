@@ -19,8 +19,8 @@ const map = [
 maxCols = 21;
 maxRows = 15;
 
-var startTop=200;
-var startLeft=200;
+var startTop=520;
+var startLeft=0;
 
 document.addEventListener('keydown', (event) => {
 const keyName = event.key;
@@ -31,7 +31,7 @@ if (keyName === "ArrowDown"){
 if (keyName === "ArrowUp"){
     startTop = startTop - 40;
 }
-//document.getElementById("player").style.top = startTop + "px";
+document.getElementById("player").style.top = startTop + "px";
 
 if (keyName === "ArrowLeft"){
     startLeft = startLeft - 40;
@@ -39,13 +39,14 @@ if (keyName === "ArrowLeft"){
 if (keyName === "ArrowRight"){
     startLeft = startLeft + 40;
 }
-//document.getElementById("player").style.left = startLeft + "px";
+document.getElementById("player").style.left = startLeft + "px";
 });
 
 function createPlayer(){
     divEl = document.createElement("div");
     divEl.className = "cell player";
-    divEl.style.top = "440px";
+    divEl.setAttribute("id", "player");
+    divEl.style.top = startTop + "px";
     document.getElementById("container").appendChild(divEl);  
 }
 
