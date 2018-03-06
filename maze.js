@@ -30,7 +30,7 @@ maxCols = 21;
 maxRows = 15;
 
 var startTop=360;
-var startLeft=5;
+var startLeft=1;
 
 
 var gameOver = false;
