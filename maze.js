@@ -41,7 +41,7 @@ function setMessage(msg){
 }
 
 document.addEventListener('keydown', (event) => {
-    setMessage("");
+    // setMessage("");
     const keyName = event.key;
     console.log('keydown event\n\n' + 'key: ' + keyName);
 
