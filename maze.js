@@ -16,37 +16,85 @@ const map = [
     "WWWWWWWWWWWWWWWWWWWWW"
 ];
 
+
+const mapArray = [];
+for (let i = 0; i < map.length; i++) {
+    mapArray.push([]);
+    mapArray[i].push(...map[i].split(""));
+  
+}
+
+// console.log("mapArray: " + JSON.stringify(mapArray));
+
 maxCols = 21;
 maxRows = 15;
 
-var startTop=520;
-var startLeft=0;
+var startTop=360;
+var startLeft=5;
+
+
+var gameOver = false;
+
+function setMessage(msg){
+    var msgEl = document.getElementById("message"); 
+    msgEl.innerHTML = msg;
+}
 
 document.addEventListener('keydown', (event) => {
-const keyName = event.key;
-console.log('keydown event\n\n' + 'key: ' + keyName);
-if (keyName === "ArrowDown"){
-    startTop = startTop + 40;
-}
-if (keyName === "ArrowUp"){
-    startTop = startTop - 40;
-}
-document.getElementById("player").style.top = startTop + "px";
+    setMessage("");
+    const keyName = event.key;
+    console.log('keydown event\n\n' + 'key: ' + keyName);
 
-if (keyName === "ArrowLeft"){
-    startLeft = startLeft - 40;
-}
-if (keyName === "ArrowRight"){
-    startLeft = startLeft + 40;
-}
-document.getElementById("player").style.left = startLeft + "px";
+    if (!gameOver) {
+
+        outerloop: for (let i = 0; i < mapArray.length; i++) {
+        innerloop:    for (let j = 0; j < mapArray[i].length; j++) {
+
+                        if (mapArray[i][j] === "S" && mapArray[i][j+1] === " " && keyName === "ArrowRight") {
+                            startLeft = startLeft + 40;
+                            document.getElementById("player").style.left = startLeft + "px";
+                            mapArray[i][j] = " ";
+                            mapArray[i][j+1] = "S";
+                            break outerloop;
+                        } else if (mapArray[i][j] === "S" && mapArray[i-1][j] === " " && keyName === "ArrowUp") {
+                            startTop = startTop - 40;
+                            document.getElementById("player").style.top = startTop + "px";
+                            mapArray[i][j] = " ";
+                            mapArray[i-1][j] = "S";
+                            break outerloop;
+                        } else if (mapArray[i][j] === "S" && mapArray[i+1][j] === " " && keyName === "ArrowDown") {
+                            startTop = startTop + 40;
+                            document.getElementById("player").style.top = startTop + "px";
+                            mapArray[i][j] = " ";
+                            mapArray[i+1][j] = "S";
+                            break outerloop;
+                        } else if (mapArray[i][j] === "S" && mapArray[i][j-1] === " " && keyName === "ArrowLeft") {
+                            startLeft = startLeft - 40;
+                            document.getElementById("player").style.left = startLeft + "px";
+                            mapArray[i][j] = " ";
+                            mapArray[i][j-1] = "S";
+                            break outerloop;
+                        } else if (mapArray[i][j] === "S" && mapArray[i][j+1] === "F" && keyName === "ArrowRight") {
+                            startLeft = startLeft + 40;
+                            document.getElementById("player").style.left = startLeft + "px";
+                            mapArray[i][j] = " ";
+                            mapArray[i][j+1] = "S"; 
+                            setMessage("You have completed the maze!");
+                            gameOver = true;
+                        }
+                    } 
+                }
+            }
+
 });
+
 
 function createPlayer(){
     divEl = document.createElement("div");
     divEl.className = "cell player";
     divEl.setAttribute("id", "player");
     divEl.style.top = startTop + "px";
+    divEl.style.left = startLeft + "px";
     document.getElementById("container").appendChild(divEl);  
 }
 
